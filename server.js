@@ -4,17 +4,25 @@ const mongoose = require('mongoose');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-const db = require('./models');
-
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/populatedb', {
-    useFindAndModify: false,
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/social-network', {
+    // useFindAndModify: false,
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    // useUnifiedTopology: true
 });
 
-app.listen(PORT, () => {
-    console.log(`App running on port ${PORT}!`);
-});
+mongoose.connection
+    .once('open', () => console.log("connected"))
+    .on('error,', error =>
+        console.log(error)
+    )
+
+// Use this to log mongo queries being executed!
+mongoose.set('debug', true);
+
+app.use(require('./routes'));
+
+app.listen(PORT, () => console.log(`🌍 Connected on localhost:${PORT}`));

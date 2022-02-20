@@ -1,7 +1,8 @@
-const { schema, model } = require('mongoose');
+const mongoose = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
+const Schema = mongoose.Schema;
 
-const reactionSchema = [{
+const reactionSchema = new mongoose.Schema({
     thoughtText: {
         type: String,
         required: "This field is required",
@@ -17,14 +18,16 @@ const reactionSchema = [{
         type: String,
         required: "Username Required"
     },
-    reactions: [reactionSchema],
-    toJSON: {
-        virtuals: true,
-        getters: true
-    }
-}]
+    // toJSON: {
+    //     virtuals: true,
+    //     getters: true
+
+    // }
+})
 
 
-thoughtSchema.virtual("reactionCount").get(
+reactionSchema.virtual("reactionCount").get(
     function() { return this.reactions.length }
 )
+
+module.exports = reactionSchema;

@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 
 
-const userSchema = new mongoose.Schema({
+const friendsSchema = new mongoose.Schema({
     username: {
         type: String,
         required: "Please enter your username",
@@ -25,22 +25,14 @@ const userSchema = new mongoose.Schema({
         },
         message: "this isnt a right email address"
     },
-    thoughts: { type: Schema.Types.ObjectId, ref: "Thoughts" },
-    friends: {
-        type: Schema.Types.ObjectId,
-        ref: 'Friends'
-    }
-})
-
-
-userSchema.virtual("friendsCount").get(function() {
-
-    return this.friends.length
+    thoughts: { type: Schema.Types.ObjectId, ref: "thoughts" },
 
 })
 
 
-const Users = mongoose.model("Users", userSchema);
 
 
-module.exports = { Users }
+const Friends = mongoose.model("Friends", friendsSchema);
+
+
+module.exports = { Friends }
