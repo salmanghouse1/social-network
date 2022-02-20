@@ -32,7 +32,6 @@ const friendsSchema = new mongoose.Schema({
 
 
 
-const Friends = mongoose.model("Friends", friendsSchema);
 
 
-module.exports = { Friends }
+module.exports = mongoose.model("Friends", friendsSchema);
