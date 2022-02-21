@@ -1,5 +1,6 @@
 const { process_params } = require('express/lib/router');
 const { Users } = require('../models');
+const { findById } = require('../models/Users');
 
 const userController = {
     // the functions will go in here as methods
@@ -45,6 +46,20 @@ const userController = {
     },
     deleteById({ params }, res) {
         Users.deleteById({ params })
+    },
+    getAllUsersByIdAndFriendsById({ params }, res) {
+        Users.find({
+            _id: params.userId,
+            friends: params.friendsId
+        })
+
+    },
+    deleteAllUsersByIdAndFriendsById({ params }, res) {
+        Users.findOneAndDelete({
+            _id: params.userId,
+            friends: params.friendsId
+        })
+
     }
 };
 
