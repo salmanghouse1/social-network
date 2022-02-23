@@ -1,11 +1,10 @@
 const { process_params } = require('express/lib/router');
-const { Users } = require('../models');
-
+const { Thoughts } = require('../models');
 
 const userController = {
     // the functions will go in here as methods
-    getAllUsers(req, res) {
-        Users.find({}).then((dbUserData) => {
+    getAllThoughts(req, res) {
+        Thoughts.find({}).then((dbUserData) => {
                 res.json(dbUserData);
                 res.status(200);
             })
@@ -14,9 +13,9 @@ const userController = {
                 res.status(400).json(err);
             });
     },
-    getAllUsersById({ params },
+    getAllThoughtsById({ params },
         res) {
-        Users.find({ _id: params.id }).then((dbUserData2) => {
+        Thoughts.find({ _id: params.id }).then((dbUserData2) => {
                 console.log("searching by id")
                 res.json(dbUserData2);
 
@@ -27,9 +26,9 @@ const userController = {
                 res.status(400).json(err);
             });
     },
-    addUser(req, res) {
-        Users.create({
-                body
+    getThoughtbyId({ params }, res) {
+        Thoughts.findById({
+                _id: params.id
             }).then((dbUserData3) => {
                 console.log("added User")
                 res.json(dbUserData3);
@@ -41,26 +40,7 @@ const userController = {
                 res.status(400).json(err);
             });
     },
-    updateUserById({ params }, res) {
-        Users.findByIdAndUpdate(params.id, { body })
-    },
-    deleteById({ params }, res) {
-        Users.deleteById({ params })
-    },
-    getAllUsersByIdAndFriendsById({ params }, res) {
-        Users.find({
-            _id: params.userId,
-            friends: params.friendsId
-        })
 
-    },
-    deleteAllUsersByIdAndFriendsById({ params }, res) {
-        Users.findOneAndDelete({
-            _id: params.userId,
-            friends: params.friendsId
-        })
-
-    }
 };
 
 module.exports = userController;

@@ -26,8 +26,5 @@ const reactionSchema = new mongoose.Schema({
 })
 
 
-reactionSchema.virtual("reactionCount").get(
-    function() { return this.reactions.length }
-)
 
 module.exports = reactionSchema;

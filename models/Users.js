@@ -26,10 +26,10 @@ const userSchema = new mongoose.Schema({
         message: "this isnt a right email address"
     },
     thoughts: { type: Schema.Types.ObjectId, ref: "Thoughts" },
-    friends: {
+    friends: [{
         type: Schema.Types.ObjectId,
         ref: 'Friends'
-    }
+    }]
 })
 
 
