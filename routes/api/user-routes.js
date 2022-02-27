@@ -3,7 +3,8 @@ const {
     getAllUsers,
     getAllUsersById,
     updateUserById,
-    deleteById
+    deleteById,
+    addUser
 } = require('../../controllers/user-controllers');
 
 
@@ -11,7 +12,7 @@ const {
 router
     .route('/')
     .get(getAllUsers)
-
+    .post(addUser)
 
 
 router
@@ -22,10 +23,10 @@ router
 
 
 
-router
-    .route('/:userId/friends/:friendId')
-    .post(getAllUsersByIdandFriendsById)
-    .delete(deleteByIdandFriendsById)
+// router
+//     .route('/:userId/friends/:friendId')
+//     .post(getAllUsersByIdandFriendsById)
+//     .delete(deleteByIdandFriendsById)
 
 
 module.exports = router;

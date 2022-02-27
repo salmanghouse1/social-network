@@ -32,6 +32,14 @@ const userSchema = new mongoose.Schema({
     }]
 })
 
+Users = mongoose.model("Users", userSchema)
+
+
+Users.insertMany([{ username: 'salmanghouse1', email: "salmanghouse1@gmail.com" }], function(err) {
+
+});
+
+
 
 userSchema.virtual("friendsCount").get(function() {
 
