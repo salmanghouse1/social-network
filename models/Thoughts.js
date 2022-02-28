@@ -33,7 +33,7 @@ const thoughtSchema = new mongoose.Schema({
 
 Thoughts = mongoose.model("Thoughts", thoughtSchema);
 
-Thoughtss.insertMany([{ thoughtText: 'Ill Straigten you out', username: "cupper12389@gmail.com" }], function(err) {
+Thoughts.insertMany([{ thoughtText: 'Ill Straigten you out', username: "cupper12389@gmail.com" }], function(err) {
 
 });
 

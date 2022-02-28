@@ -1,9 +1,7 @@
 # first commit
 
-user get is ok
+Last route
 
-user table needs to populate
+/api/thoughts/:thoughtId/reactions
 
-routes for /api/users/:userId/friends/:friendId
-
-need to be done
+needs to be done

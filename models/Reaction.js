@@ -1,30 +1,33 @@
-const mongoose = require('mongoose');
+const {
+    mongoose,
+    Types
+} = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 const Schema = mongoose.Schema;
 
+
 const reactionSchema = new mongoose.Schema({
     reactionId: {
-        type: Integer,
-        required: "Field is requred",
+        type: Types.ObjectId,
+        default: new Types.ObjectId,
 
     },
-
-
     reactionBody: {
         type: String,
         required: "This field is required",
-        validate: [({ length }) => length >= 1 && length <= 128, 'Thought should be between 1-280 chars']
+        validate: [({ length }) => length >= 1 && length <= 280, 'Thought should be between 1-280 chars']
 
+    },
+    username: {
+        type: String,
+        required: "Username Required"
     },
     createdAt: {
         type: Date,
         default: Date.now,
         get: createdAtVal => dateFormat(createdAtVal)
     },
-    username: {
-        type: String,
-        required: "Username Required"
-    },
+
     // toJSON: {
     //     virtuals: true,
     //     getters: true

@@ -18,17 +18,13 @@ const userSchema = new mongoose.Schema({
         lowercase: true,
         unique: true,
         required: 'Email address is required',
-        validate: {
-            validator: function(v) {
-                return /\d{3}-\d{3}-\d{4}/.test(v);
-            }
-        },
-        message: "this isnt a right email address"
+        match: [/.+@.+\..+/, 'Must match an email address!']
     },
+
     thoughts: { type: Schema.Types.ObjectId, ref: "Thoughts" },
     friends: [{
         type: Schema.Types.ObjectId,
-        ref: 'Friends'
+        ref: 'User'
     }]
 })
 
