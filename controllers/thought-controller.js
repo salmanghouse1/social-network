@@ -61,6 +61,41 @@ const thoughtsController = {
             });
     },
 
+    updateThought(req, res) {
+        Thoughts.findOneAndUpdate({ _id: req.params.id }, { $set: req.body }, { runValidators: true, new: true })
+            .then((dbThoughtData) => {
+                if (!dbThoughtData) {
+                    return res.status(404).json({ message: 'Id not found with the thought' });
+                }
+                res.json(dbThoughtData);
+            })
+            .catch((err) => {
+                console.log(err);
+                res.status(500).json(err);
+            });
+    },
+    deleteThought(req, res) {
+        Thoughts.findOneAndRemove({ _id: req.params.id })
+            .then((dbThoughtData) => {
+                if (!dbThoughtData) {
+                    return res.status(404).json({ message: 'cannot delete the id is not found' });
+                }
+
+                return Users.findOneAndUpdate({ thoughts: req.params.id }, { $pull: { thoughts: req.params.id } }, { new: true });
+            })
+            .then((dbUserData) => {
+                if (!dbUserData) {
+                    return res.status(404).json({ message: 'Thought created but no user with this id!' });
+                }
+                res.json({ message: 'Thought successfully deleted!' });
+            })
+            .catch((err) => {
+                console.log(err);
+                res.status(500).json(err);
+            });
+    },
+
+
 
 
     addReaction(req, res) {
